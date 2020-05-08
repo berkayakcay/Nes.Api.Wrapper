@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nes.Api.Wrapper.Legacy", "src\Nes.Api.Wrapper.Legacy\Nes.Api.Wrapper.Legacy.csproj", "{EEBEAB5E-476F-4850-AE31-27FEBF8FDA8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8122C5AF-FDA1-498B-B519-7530A4279421}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "exemples", "exemples", "{797CB6F6-F6CB-44A0-A4B6-5E1C980730E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nes.Api.Wrapper.Legacy.Console", "examples\Nes.Api.Wrapper.Legacy.Console\Nes.Api.Wrapper.Legacy.Console.csproj", "{DF438E11-AB60-4F8B-A64E-B17B77E797B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEBEAB5E-476F-4850-AE31-27FEBF8FDA8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEBEAB5E-476F-4850-AE31-27FEBF8FDA8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEBEAB5E-476F-4850-AE31-27FEBF8FDA8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEBEAB5E-476F-4850-AE31-27FEBF8FDA8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF438E11-AB60-4F8B-A64E-B17B77E797B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF438E11-AB60-4F8B-A64E-B17B77E797B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF438E11-AB60-4F8B-A64E-B17B77E797B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF438E11-AB60-4F8B-A64E-B17B77E797B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EEBEAB5E-476F-4850-AE31-27FEBF8FDA8D} = {8122C5AF-FDA1-498B-B519-7530A4279421}
+		{DF438E11-AB60-4F8B-A64E-B17B77E797B8} = {797CB6F6-F6CB-44A0-A4B6-5E1C980730E1}
+	EndGlobalSection
+EndGlobal

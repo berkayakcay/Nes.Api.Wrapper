@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>Nes.Api.Wrapper.Legacy.Console</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Nes.Api.Wrapper.Legacy\Nes.Api.Wrapper.Legacy.csproj" />
+    </ItemGroup>
+
+</Project>
