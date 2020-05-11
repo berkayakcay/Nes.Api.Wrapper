@@ -18,6 +18,31 @@
             }
 
 
+
+
+            //Gönderilecek UUDI
+            var uuid = "A7D94DF0-3FEA-4FD1-BD03-3B06D83B1485";
+            //UUDI gönderip Fatura Numarasını Alma İşlemi
+            var detailInvoiceNumberResponse = apiClient.DetailInvoiceNumber(uuid).Result;
+            System.Console.WriteLine("Invoice Number:" + detailInvoiceNumberResponse.Result);
+
+
+
+
+
+
+            //UUDI gönderip Fatura Numarasını Alma İşlemi
+            var documentStatusResponse = apiClient.DocumentStatus(uuid).Result;
+            System.Console.WriteLine("DOCUMENT STATUS:");
+            System.Console.WriteLine("Code:" + documentStatusResponse.Result.InvoiceStatusCode);
+            System.Console.WriteLine("Açıklama:" + documentStatusResponse.Result.InvoiceStatusDescription);
+            System.Console.WriteLine("Açıklama Detayı:" + documentStatusResponse.Result.InvoiceStatusDetailDescription);
+            System.Console.WriteLine("İptal Mı:" + documentStatusResponse.Result.IsCancel);
+
+
+
+
+
             System.Console.ReadLine();
         }
     }
