@@ -70,5 +70,48 @@ namespace Nes.Api.Wrapper.Legacy
                 return model;
             }
         }
+
+
+
+        /// <summary>
+        /// http://api.nesbilgi.com.tr/invoicegeneral/getInvoiceNumber/{uuid}
+        /// </summary>
+        public async Task<GeneralResponse<string>> DetailInvoiceNumber(string uuid)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/invoicegeneral/getInvoiceNumber/{uuid}");
+
+                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+
+                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                var content = await httpResponseMessage.Content.ReadAsStringAsync();
+                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<string>>(content);
+                return model;
+            }
+        }
+
+
+
+
+        /// <summary>
+        /// http://apitest.nesbilgi.com.tr/earchive/documentStatus/{uuid}
+        /// </summary>
+        public async Task<GeneralResponse<DocumentStatus>> DocumentStatus(string uuid)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/earchive/documentStatus/{uuid}");
+
+                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+
+                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                var content = await httpResponseMessage.Content.ReadAsStringAsync();
+                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<DocumentStatus>>(content);
+                return model;
+            }
+        }
     }
 }
