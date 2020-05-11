@@ -11,19 +11,24 @@ namespace Nes.Api.Wrapper.Legacy
 {
     public class ApiClient
     {
-        public const string ApiUrl = "http://apitest.nesbilgi.com.tr";
-
+        private readonly string _apiUrl;
         private readonly string _username;
         private readonly string _password;
-        public string AccessToken { get; set; } = "";
-        public DateTime ExpireDate { get; set; }
 
-        public ApiClient(string username, string password)
+
+        /// <summary>
+        /// Bilgileri sağlayacağımız bir yönetici class yapabiliriz
+        /// </summary>
+        private string AccessToken { get; set; }
+
+        private DateTime ExpireDate { get; set; }
+
+        public ApiClient(string apiUrl, string username, string password)
         {
+            _apiUrl = apiUrl;
             _username = username;
             _password = password;
         }
-
 
         public async Task<LoginResponse> Token()
         {
@@ -36,7 +41,7 @@ namespace Nes.Api.Wrapper.Legacy
                     new KeyValuePair<string, string>("password", _password)
                 };
 
-                var httpRequestMessege = new HttpRequestMessage(HttpMethod.Post, $"{ApiUrl}/token")
+                var httpRequestMessege = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/token")
                 {
                     Content = new FormUrlEncodedContent(loginRequest)
                 };
@@ -54,64 +59,10 @@ namespace Nes.Api.Wrapper.Legacy
         }
 
 
-        /// <summary>
-        /// http://api.nesbilgi.com.tr/account/templateList/{xsltType}
-        /// </summary>
-        public async Task<GeneralResponse<List<AccountTemplate>>> AccountTemplateList(Domain.Account.XsltType xsltType)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/account/templateList/{xsltType.ToString()}");
-                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
-                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+        public AccountService Account => new AccountService(_apiUrl, AccessToken);
 
-                var content = await httpResponseMessage.Content.ReadAsStringAsync();
-                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<List<AccountTemplate>>>(content);
-                return model;
-            }
-        }
+        public InvoiceGeneralService InvoiceGeneral => new InvoiceGeneralService(_apiUrl, AccessToken);
 
-
-
-        /// <summary>
-        /// http://api.nesbilgi.com.tr/invoicegeneral/getInvoiceNumber/{uuid}
-        /// </summary>
-        public async Task<GeneralResponse<string>> DetailInvoiceNumber(string uuid)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/invoicegeneral/getInvoiceNumber/{uuid}");
-
-                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
-
-                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
-
-                var content = await httpResponseMessage.Content.ReadAsStringAsync();
-                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<string>>(content);
-                return model;
-            }
-        }
-
-
-
-
-        /// <summary>
-        /// http://apitest.nesbilgi.com.tr/earchive/documentStatus/{uuid}
-        /// </summary>
-        public async Task<GeneralResponse<DocumentStatus>> DocumentStatus(string uuid)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/earchive/documentStatus/{uuid}");
-
-                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
-
-                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
-
-                var content = await httpResponseMessage.Content.ReadAsStringAsync();
-                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<DocumentStatus>>(content);
-                return model;
-            }
-        }
+        public EArchiveService EArchive => new EArchiveService(_apiUrl, AccessToken);
     }
 }
