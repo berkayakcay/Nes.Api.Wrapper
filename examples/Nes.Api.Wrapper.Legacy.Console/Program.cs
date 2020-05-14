@@ -34,6 +34,9 @@
             System.Console.WriteLine("İptal Mı:" + documentStatusResponse.Result.IsCancel);
 
 
+            var invoiceGeneralHtmlResponse = apiClient.InvoiceGeneral.Html(uuid).Result;
+            System.IO.File.WriteAllText($"D:\\{uuid}.html", invoiceGeneralHtmlResponse);
+
             System.Console.ReadLine();
         }
     }
