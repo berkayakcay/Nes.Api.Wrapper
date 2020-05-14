@@ -29,5 +29,23 @@ namespace Nes.Api.Wrapper.Legacy
                 return model;
             }
         }
+
+        ///<summary>
+        ///http://api.nesbilgi.com.tr/invoicegeneral/html/{uuid}
+        ///</summary>
+        public async Task<string> Html(string uuid)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/invoicegeneral/html/{uuid}");
+                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                var content = await httpResponseMessage.Content.ReadAsStringAsync();
+
+                return content;
+            }
+
+        }
     }
 }
