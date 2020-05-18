@@ -29,8 +29,25 @@ namespace Nes.Api.Wrapper.Legacy
             }
         }
 
-        public Task<string> DownloadTemplate(XsltType xsltType, string title)
+        public async Task<string> DownloadTemplate(XsltType xsltType, string title)
         {
+           
+            using (var httpClient = new HttpClient())
+            {
+                var loginReqDownloadTemplateuest = new List<KeyValuePair<string, string>>()
+                {
+                    new KeyValuePair<string, string>("content-type", "application/json"),
+
+                };
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/account/downloadTemplate/{xsltType.ToString()}");
+                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                var content = await httpResponseMessage.Content.ReadAsStringAsync();
+               // var model = System.Text.Json.JsonSerializer.Deserialize<DownloadTemplate<string>>(content);
+                return content;
+            }
+
             throw new System.NotImplementedException();
         }
 
@@ -38,5 +55,7 @@ namespace Nes.Api.Wrapper.Legacy
         {
             throw new System.NotImplementedException();
         }
+
+
     }
 }

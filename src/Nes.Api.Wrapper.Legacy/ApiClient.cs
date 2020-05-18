@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Nes.Api.Wrapper.Legacy.Domain;
-using Nes.Api.Wrapper.Legacy.Domain.Account;
 using Nes.Api.Wrapper.Legacy.Domain.Login;
 
 namespace Nes.Api.Wrapper.Legacy
@@ -56,6 +53,7 @@ namespace Nes.Api.Wrapper.Legacy
 
                 return model;
             }
+
         }
 
 
@@ -64,5 +62,9 @@ namespace Nes.Api.Wrapper.Legacy
         public InvoiceGeneralService InvoiceGeneral => new InvoiceGeneralService(_apiUrl, AccessToken);
 
         public EArchiveService EArchive => new EArchiveService(_apiUrl, AccessToken);
+
+
+
+        
     }
 }
