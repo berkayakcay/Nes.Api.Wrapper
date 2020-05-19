@@ -35,11 +35,18 @@
 
             //UUID gönderip faturanın html alma işlemi
             var invoiceGeneralHtmlResponse = apiClient.InvoiceGeneral.Html(uuid).Result;
-            System.IO.File.WriteAllText($"C:\\{uuid}.html", invoiceGeneralHtmlResponse);
+            System.IO.File.WriteAllText($"D:\\{uuid}.html", invoiceGeneralHtmlResponse);
 
             //// GET Şablon (XSLT) içeriğini alma 
             var downloadTemplateXslt = apiClient.Account.DownloadTemplate(Domain.Account.XsltType.eArchive, "default").Result;
-            System.IO.File.WriteAllText($"C:\\default.xslt", downloadTemplateXslt);
+            System.IO.File.WriteAllText($"D:\\default.xslt", downloadTemplateXslt);
+
+
+            //UUID gönderip faturanın XML alma işlemi
+            var invoiceGeneralXMLResponse = apiClient.InvoiceGeneral.ublXMLContent(uuid).Result;
+            System.IO.File.WriteAllText($"D:\\{uuid}.xml", invoiceGeneralXMLResponse);
+
+
 
             System.Console.ReadLine();
         }

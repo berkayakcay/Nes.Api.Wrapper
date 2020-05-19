@@ -47,5 +47,25 @@ namespace Nes.Api.Wrapper.Legacy
             }
 
         }
+
+
+
+        ///<summary>
+        ///http://api.nesbilgi.com.tr/invoicegeneral/ublXmlContent/{uuid}
+        ///</summary>
+        public async Task<string> ublXMLContent(string uuid)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/invoicegeneral/ublXmlContent/{uuid}");
+                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                var content = await httpResponseMessage.Content.ReadAsStringAsync();
+
+                return content;
+            }
+
+        }
     }
 }
