@@ -63,8 +63,10 @@ namespace Nes.Api.Wrapper.Legacy
 
         public EArchiveService EArchive => new EArchiveService(_apiUrl, AccessToken);
 
+        public CustomerService Customer => new CustomerService(_apiUrl, AccessToken);
 
 
-        
+
+
     }
 }
