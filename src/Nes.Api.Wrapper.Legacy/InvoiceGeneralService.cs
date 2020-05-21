@@ -1,19 +1,16 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Nes.Api.Wrapper.Legacy.Domain;
+using Nes.Api.Wrapper.Legacy.Interfaces;
 
 namespace Nes.Api.Wrapper.Legacy
 {
-    public class InvoiceGeneralService : ServiceBase
+    public class InvoiceGeneralService : ServiceBase, IInvoiceGeneralService
     {
         public InvoiceGeneralService(string apiUrl, string accessToken) : base(apiUrl, accessToken)
         {
         }
 
-        /// <summary>
-        /// http://api.nesbilgi.com.tr/invoicegeneral/getInvoiceNumber/{uuid}
-        /// </summary>
         public async Task<GeneralResponse<string>> DetailInvoiceNumber(string uuid)
         {
             using (var httpClient = new HttpClient())
@@ -30,10 +27,7 @@ namespace Nes.Api.Wrapper.Legacy
             }
         }
 
-        ///<summary>
-        ///http://api.nesbilgi.com.tr/invoicegeneral/html/{uuid}
-        ///</summary>
-        public async Task<string> Html(string uuid)
+        public async Task<GeneralResponse<string>> Html(string uuid)
         {
             using (var httpClient = new HttpClient())
             {
@@ -42,18 +36,16 @@ namespace Nes.Api.Wrapper.Legacy
                 var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
 
                 var content = await httpResponseMessage.Content.ReadAsStringAsync();
-
-                return content;
+                var model = new GeneralResponse<string>()
+                {
+                    Result = content
+                };
+                return model;
             }
-
         }
 
 
-
-        ///<summary>
-        ///http://api.nesbilgi.com.tr/invoicegeneral/ublXmlContent/{uuid}
-        ///</summary>
-        public async Task<string> ublXMLContent(string uuid)
+        public async Task<GeneralResponse<string>> UblXmlContent(string uuid)
         {
             using (var httpClient = new HttpClient())
             {
@@ -62,10 +54,13 @@ namespace Nes.Api.Wrapper.Legacy
                 var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
 
                 var content = await httpResponseMessage.Content.ReadAsStringAsync();
+                var model = new GeneralResponse<string>()
+                {
+                    Result = content
+                };
 
-                return content;
+                return model;
             }
-
         }
     }
 }

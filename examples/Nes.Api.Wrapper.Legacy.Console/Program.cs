@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Nes.Api.Wrapper.Legacy.Console
 {
@@ -37,29 +38,33 @@ namespace Nes.Api.Wrapper.Legacy.Console
 
             //UUID gönderip faturanın html alma işlemi
             var invoiceGeneralHtmlResponse = apiClient.InvoiceGeneral.Html(uuid).Result;
-            System.IO.File.WriteAllText($"D:\\{uuid}.html", invoiceGeneralHtmlResponse);
+            System.IO.File.WriteAllText($"D:\\{uuid}.html", invoiceGeneralHtmlResponse.Result);
 
             //// GET Şablon (XSLT) içeriğini alma 
-            var downloadTemplateXslt = apiClient.Account.DownloadTemplate(Domain.Account.XsltType.eArchive, "default").Result;
-            System.IO.File.WriteAllText($"D:\\default.xslt", downloadTemplateXslt);
+            var downloadTemplateXsltResponse = apiClient.Account.DownloadTemplate(Domain.Account.XsltType.eArchive, "default").Result;
+            System.IO.File.WriteAllText($"D:\\default.xslt", downloadTemplateXsltResponse.Result);
+
+            // 
+            var creditsInfoResponse = apiClient.Account.CreditsInfo().Result;
+            System.Console.WriteLine(creditsInfoResponse.Result.TotalUseCount);
 
 
             //UUID gönderip faturanın XML alma işlemi
-            var invoiceGeneralXMLResponse = apiClient.InvoiceGeneral.ublXMLContent(uuid).Result;
-            System.IO.File.WriteAllText($"D:\\{uuid}.xml", invoiceGeneralXMLResponse);
+            var invoiceGeneralXmlResponse = apiClient.InvoiceGeneral.UblXmlContent(uuid).Result;
+            System.IO.File.WriteAllText($"D:\\{uuid}.xml", invoiceGeneralXmlResponse.Result);
 
 
 
             // Belirtilen VKN/TCKN'nin e-Fatura mükellefi olup olmadığını sorgulama
             var checkListResponse = apiClient.Customer.Check("5555553487").Result;
-            foreach (var CustomerCheckResult in checkListResponse.Result.CustomerList)
+            foreach (var customerCheckResult in checkListResponse.Result.CustomerList)
             {
-                System.Console.WriteLine($"{CustomerCheckResult.RegisterNumber}");
-                System.Console.WriteLine($"{CustomerCheckResult.Title}");
-                System.Console.WriteLine($"{CustomerCheckResult.Alias}");
-                System.Console.WriteLine($"{CustomerCheckResult.Type}");
-                System.Console.WriteLine($"{CustomerCheckResult.FirstCreationTime.ToString()}");
-                System.Console.WriteLine($"{CustomerCheckResult.AliasCreationTime.ToString()}");
+                System.Console.WriteLine($"{customerCheckResult.RegisterNumber}");
+                System.Console.WriteLine($"{customerCheckResult.Title}");
+                System.Console.WriteLine($"{customerCheckResult.Alias}");
+                System.Console.WriteLine($"{customerCheckResult.Type}");
+                System.Console.WriteLine($"{customerCheckResult.FirstCreationTime.ToString(CultureInfo.InvariantCulture)}");
+                System.Console.WriteLine($"{customerCheckResult.AliasCreationTime.ToString(CultureInfo.InvariantCulture)}");
             }
             System.Console.WriteLine($"{checkListResponse.Result.ISEInvoiceCustomer}");
 
@@ -72,8 +77,8 @@ namespace Nes.Api.Wrapper.Legacy.Console
                 System.Console.WriteLine($"{allCustomerResult.Title}");
                 System.Console.WriteLine($"{allCustomerResult.Alias}");
                 System.Console.WriteLine($"{allCustomerResult.Type}");
-                System.Console.WriteLine($"{allCustomerResult.FirstCreationTime.ToString()}");
-                System.Console.WriteLine($"{allCustomerResult.AliasCreationTime.ToString()}");
+                System.Console.WriteLine($"{allCustomerResult.FirstCreationTime.ToString(CultureInfo.InvariantCulture)}");
+                System.Console.WriteLine($"{allCustomerResult.AliasCreationTime.ToString(CultureInfo.InvariantCulture)}");
             }
 
             var downloadZipResponse = apiClient.Customer.DownloadZip().Result;

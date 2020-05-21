@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Nes.Api.Wrapper.Legacy.Domain
+namespace Nes.Api.Wrapper.Legacy
 {
     public class GeneralResponse<T>
     {
