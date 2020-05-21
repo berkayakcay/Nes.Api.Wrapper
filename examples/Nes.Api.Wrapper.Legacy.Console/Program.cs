@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Nes.Api.Wrapper.Legacy.Models;
 
 namespace Nes.Api.Wrapper.Legacy.Console
 {
@@ -9,12 +10,12 @@ namespace Nes.Api.Wrapper.Legacy.Console
         {
             // Kullanıcıların yaratacağı nesne
             var apiClient = new ApiClient("http://apitest.nesbilgi.com.tr/", "test01@nesbilgi.com.tr", "V9zH7Hh55LIl");
-
+            
             // Örnek Token alma işlemi
             var loginResponse = apiClient.Token().Result;
 
             // Örnek Xslt listesini alma işlemi
-            var generalResponse = apiClient.Account.TemplateList(Nes.Api.Wrapper.Legacy.Domain.Account.XsltType.eArchive).Result;
+            var generalResponse = apiClient.Account.TemplateList(XsltTypeResponseParameter.eArchive).Result;
             foreach (var accountTemplate in generalResponse.Result)
             {
                 System.Console.WriteLine($"{accountTemplate.Title} {accountTemplate.IsDefault}");
@@ -41,7 +42,7 @@ namespace Nes.Api.Wrapper.Legacy.Console
             System.IO.File.WriteAllText($"D:\\{uuid}.html", invoiceGeneralHtmlResponse.Result);
 
             //// GET Şablon (XSLT) içeriğini alma 
-            var downloadTemplateXsltResponse = apiClient.Account.DownloadTemplate(Domain.Account.XsltType.eArchive, "default").Result;
+            var downloadTemplateXsltResponse = apiClient.Account.DownloadTemplate(XsltTypeResponseParameter.eArchive, "default").Result;
             System.IO.File.WriteAllText($"D:\\default.xslt", downloadTemplateXsltResponse.Result);
 
             // 

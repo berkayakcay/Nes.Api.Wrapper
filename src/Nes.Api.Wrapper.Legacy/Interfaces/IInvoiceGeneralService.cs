@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Nes.Api.Wrapper.Legacy.Models;
 
 namespace Nes.Api.Wrapper.Legacy.Interfaces
 {

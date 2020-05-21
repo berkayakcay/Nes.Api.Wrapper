@@ -1,4 +1,4 @@
-namespace Nes.Api.Wrapper.Legacy.Domain.Login
+namespace Nes.Api.Wrapper.Legacy.Models
 {
     public class LoginResponse
     {

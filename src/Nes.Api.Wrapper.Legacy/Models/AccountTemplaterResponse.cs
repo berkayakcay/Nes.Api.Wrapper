@@ -1,6 +1,6 @@
-namespace Nes.Api.Wrapper.Legacy.Domain.Account
+namespace Nes.Api.Wrapper.Legacy.Models
 {
-    public class AccountTemplate
+    public class AccountTemplaterResponse
     {
         public string Title { get; set; }
         public bool IsDefault { get; set; }

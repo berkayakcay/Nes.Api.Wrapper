@@ -1,6 +1,6 @@
 using System;
 
-namespace Nes.Api.Wrapper.Legacy
+namespace Nes.Api.Wrapper.Legacy.Services
 {
     public abstract class ServiceBase
     {

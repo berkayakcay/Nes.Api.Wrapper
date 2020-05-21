@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Nes.Api.Wrapper.Legacy.Domain.Login;
+using Nes.Api.Wrapper.Legacy.Models;
+using Nes.Api.Wrapper.Legacy.Services;
 
 namespace Nes.Api.Wrapper.Legacy
 {

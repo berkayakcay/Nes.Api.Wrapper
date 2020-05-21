@@ -1,12 +1,11 @@
-﻿using Nes.Api.Wrapper.Legacy.Customer;
-using Nes.Api.Wrapper.Legacy.Domain;
-using Nes.Api.Wrapper.Legacy.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Nes.Api.Wrapper.Legacy.Interfaces;
+using Nes.Api.Wrapper.Legacy.Models;
 
-namespace Nes.Api.Wrapper.Legacy
+namespace Nes.Api.Wrapper.Legacy.Services
 {
     public class CustomerService : ServiceBase, ICustomerService
     {
@@ -15,7 +14,7 @@ namespace Nes.Api.Wrapper.Legacy
         }
 
 
-        public async Task<GeneralResponse<CustomerCheckResult>> Check(string registerNumber)
+        public async Task<GeneralResponse<CustomerCheckResponse>> Check(string registerNumber)
         {
             using (var httpClient = new HttpClient())
             {
@@ -24,13 +23,13 @@ namespace Nes.Api.Wrapper.Legacy
                 var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
 
                 var content = await httpResponseMessage.Content.ReadAsStringAsync();
-                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<CustomerCheckResult>>(content);
+                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<CustomerCheckResponse>>(content);
                 return model;
             }
         }
 
 
-        public async Task<GeneralResponse<List<GlobalCustomer>>> AllCustomer()
+        public async Task<GeneralResponse<List<GlobalCustomerResponse>>> AllCustomer()
         {
             using (var httpClient = new HttpClient())
             {
@@ -39,7 +38,7 @@ namespace Nes.Api.Wrapper.Legacy
                 var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
 
                 var content = await httpResponseMessage.Content.ReadAsStringAsync();
-                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<List<GlobalCustomer>>>(content);
+                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<List<GlobalCustomerResponse>>>(content);
                 return model;
             }
         }

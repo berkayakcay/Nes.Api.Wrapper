@@ -1,10 +1,9 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Nes.Api.Wrapper.Legacy.Domain;
-using Nes.Api.Wrapper.Legacy.Domain.Account;
+using Nes.Api.Wrapper.Legacy.Models;
 
-namespace Nes.Api.Wrapper.Legacy
+namespace Nes.Api.Wrapper.Legacy.Services
 {
     public class EArchiveService : ServiceBase
     {
@@ -16,7 +15,7 @@ namespace Nes.Api.Wrapper.Legacy
         /// <summary>
         /// http://apitest.nesbilgi.com.tr/earchive/documentStatus/{uuid}
         /// </summary>
-        public async Task<GeneralResponse<DocumentStatus>> DocumentStatus(string uuid)
+        public async Task<GeneralResponse<DocumentStatusResponse>> DocumentStatus(string uuid)
         {
             using (var httpClient = new HttpClient())
             {
@@ -27,7 +26,7 @@ namespace Nes.Api.Wrapper.Legacy
                 var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
 
                 var content = await httpResponseMessage.Content.ReadAsStringAsync();
-                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<DocumentStatus>>(content);
+                var model = System.Text.Json.JsonSerializer.Deserialize<GeneralResponse<DocumentStatusResponse>>(content);
                 return model;
             }
         }

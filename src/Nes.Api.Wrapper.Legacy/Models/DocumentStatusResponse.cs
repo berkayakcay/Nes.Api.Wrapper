@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Nes.Api.Wrapper.Legacy.Domain.Account
+﻿namespace Nes.Api.Wrapper.Legacy.Models
 {
-    public class DocumentStatus
+    public class DocumentStatusResponse
     {
         public int InvoiceStatusCode { get; set; } //Fatura durumunun kodu bu alanda döner
         public string InvoiceStatusDescription { get; set; } //Fatura durum açıklaması bu alanda döner

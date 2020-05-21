@@ -1,9 +1,6 @@
-﻿using Nes.Api.Wrapper.Legacy.Customer;
-using Nes.Api.Wrapper.Legacy.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Nes.Api.Wrapper.Legacy.Models;
 
 namespace Nes.Api.Wrapper.Legacy.Interfaces
 {
@@ -14,14 +11,14 @@ namespace Nes.Api.Wrapper.Legacy.Interfaces
         /// http://apitest.nesbilgi.com.tr/customer/check/{registerNumber}
         /// </summary>
         /// <param name="registerNumber"></param>
-        Task<GeneralResponse<CustomerCheckResult>> Check(string registerNumber);
+        Task<GeneralResponse<CustomerCheckResponse>> Check(string registerNumber);
 
 
         /// <summary>
         /// GET Sistemde kayıtlı tüm e-Fatura mükelleflerini çekme
         /// http://apitest.nesbilgi.com.tr/customer/all
         /// </summary>
-        Task<GeneralResponse<List<GlobalCustomer>>> AllCustomer();
+        Task<GeneralResponse<List<GlobalCustomerResponse>>> AllCustomer();
         
 
         /// <summary>

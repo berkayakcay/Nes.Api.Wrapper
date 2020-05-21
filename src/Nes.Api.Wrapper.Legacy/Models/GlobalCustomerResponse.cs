@@ -1,10 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 
-namespace Nes.Api.Wrapper.Legacy.Customer
+namespace Nes.Api.Wrapper.Legacy.Models
 {
-    public class GlobalCustomer
+    public class GlobalCustomerResponse
     {
         public string RegisterNumber { get; set; }
         public string Title { get; set; }
@@ -12,12 +10,5 @@ namespace Nes.Api.Wrapper.Legacy.Customer
         public string Type { get; set; }
         public DateTime FirstCreationTime { get; set; }
         public DateTime AliasCreationTime { get; set; }
-    }
-
-
-    public class CustomerCheckResult
-    {
-        public List<GlobalCustomer> CustomerList { get; set; }
-        public bool ISEInvoiceCustomer { get; set; }
     }
 }

@@ -2,8 +2,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Nes.Api.Wrapper.Legacy.Interfaces;
+using Nes.Api.Wrapper.Legacy.Models;
 
-namespace Nes.Api.Wrapper.Legacy
+namespace Nes.Api.Wrapper.Legacy.Services
 {
     public class InvoiceGeneralService : ServiceBase, IInvoiceGeneralService
     {

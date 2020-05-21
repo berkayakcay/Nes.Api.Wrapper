@@ -1,6 +1,6 @@
 using System;
 
-namespace Nes.Api.Wrapper.Legacy.Account
+namespace Nes.Api.Wrapper.Legacy.Models
 {
     public class CreditDetailResponse
     {
