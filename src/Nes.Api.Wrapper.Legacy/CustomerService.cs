@@ -1,11 +1,9 @@
 ﻿using Nes.Api.Wrapper.Legacy.Customer;
 using Nes.Api.Wrapper.Legacy.Domain;
 using Nes.Api.Wrapper.Legacy.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Nes.Api.Wrapper.Legacy
@@ -46,5 +44,21 @@ namespace Nes.Api.Wrapper.Legacy
             }
         }
 
+        public async Task<GeneralResponse<byte[]>> DownloadZip()
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, $"{ApiUrl}/customer/downloadZip");
+                httpRequestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+                var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+
+                var content = await httpResponseMessage.Content.ReadAsByteArrayAsync();
+                var model = new GeneralResponse<byte[]>()
+                {
+                    Result = content
+                };
+                return model;
+            }
+        }
     }
 }

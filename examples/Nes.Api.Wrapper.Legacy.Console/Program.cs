@@ -1,4 +1,6 @@
-﻿namespace Nes.Api.Wrapper.Legacy.Console
+﻿using System;
+
+namespace Nes.Api.Wrapper.Legacy.Console
 {
     class Program
     {
@@ -74,6 +76,8 @@
                 System.Console.WriteLine($"{allCustomerResult.AliasCreationTime.ToString()}");
             }
 
+            var downloadZipResponse = apiClient.Customer.DownloadZip().Result;
+            System.IO.File.WriteAllBytesAsync(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),"userList.zip"),downloadZipResponse.Result);
 
             System.Console.ReadLine();
         }
