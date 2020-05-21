@@ -1,4 +1,6 @@
-﻿namespace Nes.Api.Wrapper.Legacy.Console
+﻿using System;
+
+namespace Nes.Api.Wrapper.Legacy.Console
 {
     class Program
     {
@@ -47,6 +49,35 @@
             System.IO.File.WriteAllText($"D:\\{uuid}.xml", invoiceGeneralXMLResponse);
 
 
+
+            // Belirtilen VKN/TCKN'nin e-Fatura mükellefi olup olmadığını sorgulama
+            var checkListResponse = apiClient.Customer.Check("5555553487").Result;
+            foreach (var CustomerCheckResult in checkListResponse.Result.CustomerList)
+            {
+                System.Console.WriteLine($"{CustomerCheckResult.RegisterNumber}");
+                System.Console.WriteLine($"{CustomerCheckResult.Title}");
+                System.Console.WriteLine($"{CustomerCheckResult.Alias}");
+                System.Console.WriteLine($"{CustomerCheckResult.Type}");
+                System.Console.WriteLine($"{CustomerCheckResult.FirstCreationTime.ToString()}");
+                System.Console.WriteLine($"{CustomerCheckResult.AliasCreationTime.ToString()}");
+            }
+            System.Console.WriteLine($"{checkListResponse.Result.ISEInvoiceCustomer}");
+
+
+            // Sistemde kayıtlı tüm e-Fatura mükelleflerini çekme
+            var allCustomerListResponse = apiClient.Customer.AllCustomer().Result;
+            foreach (var allCustomerResult in allCustomerListResponse.Result)
+            {
+                System.Console.WriteLine($"{allCustomerResult.RegisterNumber}");
+                System.Console.WriteLine($"{allCustomerResult.Title}");
+                System.Console.WriteLine($"{allCustomerResult.Alias}");
+                System.Console.WriteLine($"{allCustomerResult.Type}");
+                System.Console.WriteLine($"{allCustomerResult.FirstCreationTime.ToString()}");
+                System.Console.WriteLine($"{allCustomerResult.AliasCreationTime.ToString()}");
+            }
+
+            var downloadZipResponse = apiClient.Customer.DownloadZip().Result;
+            System.IO.File.WriteAllBytesAsync(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),"userList.zip"),downloadZipResponse.Result);
 
             System.Console.ReadLine();
         }
