@@ -117,7 +117,7 @@ namespace Nes.Api.Wrapper.Legacy.Services
 
 
 
-        public async Task<GeneralResponse<string>> SendNESInvoice(NesInvoiceSendRequest nesInvoiceSendRequest)
+        public async Task<GeneralResponse<string>> SendNesInvoice(NesInvoiceSendRequest nesInvoiceSendRequest)
         {
             using (var httpClient = new HttpClient())
             {
@@ -138,7 +138,7 @@ namespace Nes.Api.Wrapper.Legacy.Services
         }
 
 
-        public async Task<GeneralResponse<bool>> SendUBLInvoice(UBLInvoiceSendRequest ublInvoiceSendRequest)
+        public async Task<GeneralResponse<bool>> SendUblInvoice(UblInvoiceSendRequest ublInvoiceSendRequest)
         {
             using (var httpClient = new HttpClient())
             {

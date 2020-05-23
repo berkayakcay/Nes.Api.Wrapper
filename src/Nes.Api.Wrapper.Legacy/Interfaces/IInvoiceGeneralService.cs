@@ -38,11 +38,11 @@ namespace Nes.Api.Wrapper.Legacy.Interfaces
         ///<summary>
         ///http://apitest.nesbilgi.com.tr/invoicegeneral/sendNESInvoice
         ///</summary>
-        Task<GeneralResponse<string>> SendNESInvoice(NesInvoiceSendRequest NESInvoiceSendRequest);
+        Task<GeneralResponse<string>> SendNesInvoice(NesInvoiceSendRequest nesInvoiceSendRequest);
 
         ///<summary>
         ///http://apitest.nesbilgi.com.tr/invoicegeneral/sendUBLInvoice
         ///</summary>
-        Task<GeneralResponse<bool>> SendUBLInvoice(UBLInvoiceSendRequest ublInvoiceSendRequest);
+        Task<GeneralResponse<bool>> SendUblInvoice(UblInvoiceSendRequest ublInvoiceSendRequest);
     }
 }

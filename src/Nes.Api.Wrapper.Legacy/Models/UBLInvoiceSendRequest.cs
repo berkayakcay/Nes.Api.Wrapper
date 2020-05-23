@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Nes.Api.Wrapper.Legacy.Models
 {
-    public class UBLInvoiceSendRequest
+    public class UblInvoiceSendRequest
     {
         /// <summary>
         ///Gönderilecek olan UBL faturanın detay bilgileri bu alana eklenir.
