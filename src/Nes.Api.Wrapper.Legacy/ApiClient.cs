@@ -7,19 +7,15 @@ using Nes.Api.Wrapper.Legacy.Services;
 
 namespace Nes.Api.Wrapper.Legacy
 {
-    public class ApiClient
+    public class ApiClient : IApiClient
     {
         private readonly string _apiUrl;
         private readonly string _username;
         private readonly string _password;
 
+        public string AccessToken { get; set; }
 
-        /// <summary>
-        /// Bilgileri sağlayacağımız bir yönetici class yapabiliriz
-        /// </summary>
-        private string AccessToken { get; set; }
-
-        private DateTime ExpireDate { get; set; }
+        public DateTime ExpireDate { get; set; }
 
         public ApiClient(string apiUrl, string username, string password)
         {
@@ -54,9 +50,7 @@ namespace Nes.Api.Wrapper.Legacy
 
                 return model;
             }
-
         }
-
 
         public AccountService Account => new AccountService(_apiUrl, AccessToken);
 
@@ -65,9 +59,5 @@ namespace Nes.Api.Wrapper.Legacy
         public EArchiveService EArchive => new EArchiveService(_apiUrl, AccessToken);
 
         public CustomerService Customer => new CustomerService(_apiUrl, AccessToken);
-
-
-
-
     }
 }
