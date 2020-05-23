@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -21,9 +24,6 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -31,13 +31,17 @@
 </header>
 <div class="container">
     <main role="main" class="pb-3">
+        <partial name="_ValidationSummary"/>
         @RenderBody()
     </main>
 </div>
 
 <footer class="border-top footer text-muted">
     <div class="container">
-        &copy; 2020 - Nes.Api.Wrapper.Legacy.Mvc - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <input class="form-control" type="text" placeholder="token" value="@HttpContextAccessor.HttpContext.Session.GetString("access_token")" readonly/>
+    </div>
+    <div class="container">
+        &copy; 2020 - Nes.Api.Wrapper.Legacy.Mvc
     </div>
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

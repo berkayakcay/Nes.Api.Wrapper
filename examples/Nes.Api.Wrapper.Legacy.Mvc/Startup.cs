@@ -24,8 +24,17 @@ namespace Nes.Api.Wrapper.Legacy.Mvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
-            services.AddSingleton<IApiClient, ApiClient>();
+            services.AddHttpContextAccessor();
+            
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(1);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            
+            services.AddTransient<IApiClient, ApiClient>(provider => new ApiClient("http://apitest.nesbilgi.com.tr/", "test01@nesbilgi.com.tr", "V9zH7Hh55LIl"));
             
         }
 
@@ -50,6 +59,8 @@ namespace Nes.Api.Wrapper.Legacy.Mvc
 
             app.UseAuthorization();
 
+            app.UseSession();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

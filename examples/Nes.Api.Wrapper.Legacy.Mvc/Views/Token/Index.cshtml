@@ -1,0 +1,32 @@
+﻿@model TokenViewModel
+@{
+    ViewData["Title"] = "Token";
+}
+
+<div>
+    <h1 class="display-4">Token</h1>
+
+    <div>
+        <form action="" method="post" id="form_token">
+            <div class="form-group">
+                <label>Mail</label>
+                <input type="email" class="form-control" asp-for="Mail">
+                <span asp-validation-for="Mail"></span>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" asp-for="Password">
+                <span asp-validation-for="Password"></span>
+            </div>
+            <button type="submit" asp-controller="Token" asp-action="Index" class="btn btn-primary">Token al</button>
+        </form>
+    </div>
+
+    <div></div>
+
+    <div class="form-group">
+        <label asp-for="Token"></label>
+        <textarea class="form-control"  asp-for="Token" rows="3" readonly="readonly"></textarea>
+    </div>
+</div>
+
