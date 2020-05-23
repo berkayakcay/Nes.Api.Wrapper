@@ -19,5 +19,30 @@ namespace Nes.Api.Wrapper.Legacy.Interfaces
         /// http://api.nesbilgi.com.tr/invoicegeneral/ublXmlContent/{uuid}
         ///</summary>
         Task<GeneralResponse<string>> UblXmlContent(string uuid);
+
+        ///<summary>
+        ///http://api.nesbilgi.com.tr/invoicegeneral/pdf/{uuid}
+        ///</summary>
+        Task<GeneralResponse<byte[]>> Pdf(string uuid);
+
+        ///<summary>
+        ///http://apitest.nesbilgi.com.tr/invoicegeneral/deletedraft/{uuid}
+        ///</summary>
+        Task<GeneralResponse<string>> DeleteDraft(string uuid);
+
+        ///<summary>
+        ///http://apitest.nesbilgi.com.tr/invoicegeneral/approveandsenddraft/{uuid}
+        ///</summary>
+        Task<GeneralResponse<string>> ApproveandSendDraft(string uuid);
+
+        ///<summary>
+        ///http://apitest.nesbilgi.com.tr/invoicegeneral/sendNESInvoice
+        ///</summary>
+        Task<GeneralResponse<string>> SendNESInvoice(NesInvoiceSendRequest NESInvoiceSendRequest);
+
+        ///<summary>
+        ///http://apitest.nesbilgi.com.tr/invoicegeneral/sendUBLInvoice
+        ///</summary>
+        Task<GeneralResponse<bool>> SendUBLInvoice(UBLInvoiceSendRequest ublInvoiceSendRequest);
     }
 }

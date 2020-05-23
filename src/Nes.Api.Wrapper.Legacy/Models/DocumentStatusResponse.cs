@@ -2,9 +2,21 @@
 {
     public class DocumentStatusResponse
     {
-        public int InvoiceStatusCode { get; set; } //Fatura durumunun kodu bu alanda döner
-        public string InvoiceStatusDescription { get; set; } //Fatura durum açıklaması bu alanda döner
-        public string InvoiceStatusDetailDescription { get; set; } //Fatura durum açıklamasının detayı bu alanda döner
-        public bool IsCancel { get; set; } //Faturanın iptal edilip edilmediği bu alanda dönülür.
+        /// <summary>
+        /// Fatura durumunun kodu bu alanda döner
+        /// </summary>
+        public int InvoiceStatusCode { get; set; }
+        /// <summary>
+        /// Fatura durum açıklaması bu alanda döner
+        /// </summary>
+        public string InvoiceStatusDescription { get; set; }
+        /// <summary>
+        /// Fatura durum açıklamasının detayı bu alanda döner
+        /// </summary>
+        public string InvoiceStatusDetailDescription { get; set; }
+        /// <summary>
+        /// Faturanın iptal edilip edilmediği bu alanda dönülür. 
+        /// </summary>
+        public bool IsCancel { get; set; } 
     }
 }
