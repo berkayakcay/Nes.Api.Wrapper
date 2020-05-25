@@ -9,6 +9,7 @@ namespace Nes.Api.Wrapper.Legacy.Console
     {
         static void Main(string[] args)
         {
+
             // Kullanıcıların yaratacağı nesne
             var apiClient = new ApiClient("http://apitest.nesbilgi.com.tr/", "test01@nesbilgi.com.tr", "V9zH7Hh55LIl");
 
@@ -195,6 +196,44 @@ namespace Nes.Api.Wrapper.Legacy.Console
             var invoiceGeneralSendUblResponse = apiClient.InvoiceGeneral.SendUblInvoice(sendUblInvoice);
             System.Console.WriteLine("Invoice Send:" + invoiceGeneralSendUblResponse.Result.ToString());
 
+            //UUDI gönderip e-Arşive Fatura Numarasını Alma İşlemi
+            var eArchivedocumentStatusResponse = apiClient.EArchive.DocumentStatus(uuid).Result;
+            System.Console.WriteLine("DOCUMENT STATUS:");
+            System.Console.WriteLine("Code:" + eArchivedocumentStatusResponse.Result.InvoiceStatusCode);
+            System.Console.WriteLine("Açıklama:" + eArchivedocumentStatusResponse.Result.InvoiceStatusDescription);
+            System.Console.WriteLine("Açıklama Detayı:" + eArchivedocumentStatusResponse.Result.InvoiceStatusDetailDescription);
+            System.Console.WriteLine("İptal Mı:" + eArchivedocumentStatusResponse.Result.IsCancel);
+
+            //Belirtilen UUID'ye ait faturayı iptal etme
+            var eArchiveInvoiceCancel = apiClient.EArchive.InvoiceCancel(uuid).Result;
+            System.Console.WriteLine("Fatura Durumu:" + eArchiveInvoiceCancel.Result);
+
+            //Belirtilen UUID'ye ait faturanın mail istatistiklerini alma
+            var mailResponse = apiClient.EArchive.MailStatistics(uuid).Result;
+            foreach (var mailResponsee in mailResponse.Result)
+            {
+                System.Console.WriteLine($"Mail Gönderilen Adres : " + mailResponsee.ReceiverMail);
+                System.Console.WriteLine($"Fatura Görüntüleme Durumu : " + mailResponsee.IsView);
+            }
+
+            var sendMailResponse = new SendMailRequest()
+            {
+                InvoiceUUID = uuid,
+                ReceiverMailList = new List<string>()
+                    {
+                        "test1@nesbilgi.com.tr",
+                        "tugba.dogan@nesbilgi.com.tr"
+                    }
+            };
+
+            //Belirtilen UUID'ye ait faturayı belirtilen kişilere mail atma
+            var usersendmail = apiClient.EArchive.SendMail(sendMailResponse).Result;
+            foreach (var sendmailuser in usersendmail.Result)
+            {
+                System.Console.WriteLine($"Mail gönderim sonucu" + sendmailuser.ReceiverMail);
+                System.Console.WriteLine($"Alıcı maili" + sendmailuser.ResultStatus);
+                System.Console.WriteLine($"Mail açıklaması" + sendmailuser.Description);
+            }
 
             System.Console.ReadLine();
         }
